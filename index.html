@@ -8,115 +8,153 @@
 </head>
 <body>
 
-  <!-- LOADER -->
-  <div id="loader"><span>Loading</span></div>
+  <div id="loader" style="position:fixed;inset:0;background:#0a0a0f;display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity .5s;">
+    <span style="font-family:'Syne',sans-serif;font-size:.9rem;letter-spacing:.35em;color:#E8D9B8;text-transform:uppercase;">Loading</span>
+  </div>
 
-  <!-- HEADER -->
   <header>
-    <div class="logo">J<em>D</em></div>
+    <div class="logo">
+    <a href="#hero">
+        <img src="assets/my-notion-face-transparent.png" alt="John Harold Doton Logo">
+    </a>
+</div>
     <nav>
       <ul>
-        <li><a href="#hero">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#resume">Resume</a></li>
+        <li><a href="#work">Work</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <div class="nav-badge"><span class="nav-dot"></span>Open to work</div>
   </header>
 
-  <!-- HERO -->
   <section id="hero">
-    <div class="hero-plate">
-      <p class="welcome">Hello there</p>
-      <h1>John Harold Doton</h1>
-      <span id="typing"></span>
-      <p class="hero-desc">Building modern web applications and creative digital experiences.</p>
-      <div class="btn-row">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#resume" class="btn btn-outline">Resume</a>
+    <div>
+      <p class="hero-tag">Portfolio · 2026</p>
+      <h1>John Harold<br>Doton</h1>
+      <p class="hero-sub"><span id="typing"></span></p>
+      <p class="hero-sub" style="margin-top:12px;">Building modern web applications and creative digital experiences.</p>
+      <div class="hero-row">
+        <a href="#work" class="btn-solid">View projects</a>
+        <a href="assets/resume.pdf" class="btn-line">Resume</a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="container">
-      <h2>About <span>Me</span></h2>
+      <div class="sec-head"><h2 class="sec-title">About</h2></div>
       <div class="about-grid reveal">
-        <div class="profile-wrap">
-          <img src="assets/profile.png" alt="John Harold Doton">
+        <div class="avatar">
+          <img src="assets/HAROLDPHOTO1.jpg" alt="John Harold Doton" onerror="this.style.display='none';this.parentElement.textContent='JD'">
         </div>
         <div class="about-body">
-          <p>Hey, I'm John Harold Doton.</p>
-          <p>I'm a Computer Science student passionate about software engineering, web development, AI, game development, and UI/UX design.</p>
-          <p>I enjoy building modern applications that combine great functionality with beautiful design.</p>
-          <div class="tags">
-            <span>Software Engineering</span>
-            <span>Game Development</span>
-            <span>Artificial Intelligence</span>
-            <span>UI / UX</span>
-            <span>Open Source</span>
+          <p>I'm a <strong>Computer Science student</strong> based in Manila, passionate about the intersection of engineering and design.</p>
+          <p>My work spans <strong>web applications, mobile apps, and games</strong>. I care as much about how things feel as how they work.</p>
+          <div class="tagstrip">
+            <span class="tag">Software Engineering</span>
+           
+            <span class="tag">Artificial Intelligence</span>
+            <span class="tag">UI / UX</span>
+            <span class="tag">Open Source</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="container">
-      <h2>Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-card glass reveal">
-          <h3>Frontend</h3>
-          <ul>
-            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Tailwind CSS</li>
-          </ul>
+      <div class="sec-head"><h2 class="sec-title">Skills</h2></div>
+      <div class="skills-cols reveal">
+        <div class="skills-col">
+          <span class="col-label">Development</span>
+          <div class="skill-flow">
+            <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span>
+            <span class="skill">React</span><span class="skill">Tailwind CSS</span><span class="skill">Node.js</span>
+            <span class="skill">Express</span><span class="skill">Python</span><span class="skill">PostgreSQL</span>
+            <span class="skill">Firebase</span><span class="skill">C#</span>
+          </div>
         </div>
-        <div class="skill-card glass reveal">
-          <h3>Backend</h3>
-          <ul>
-            <li>Node.js</li><li>Express</li><li>Firebase</li><li>Python</li><li>PostgreSQL</li>
-          </ul>
-        </div>
-        <div class="skill-card glass reveal">
-          <h3>Tools</h3>
-          <ul>
-            <li>Git</li><li>GitHub</li><li>Figma</li><li>Unity</li><li>Android Studio</li>
-          </ul>
+        <div class="skills-col">
+          <span class="col-label">Tools and design</span>
+          <div class="skill-flow">
+            <span class="skill">Git</span><span class="skill">GitHub</span><span class="skill">Figma</span>
+            <span class="skill">Unity</span><span class="skill">Android Studio</span><span class="skill">VS Code</span>
+            <span class="skill">UI / UX</span><span class="skill">Game Design</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RESUME -->
+  <section id="work">
+    <div class="container">
+      <div class="sec-head"><h2 class="sec-title">Work</h2><span class="sec-note">Projects</span></div>
+      <div class="reveal">
+        <div class="work-item">
+          <div>
+            <h3 class="work-title">Your Project Title</h3>
+            <div class="work-meta">
+              <span class="work-tag accent">Featured</span>
+              <span class="work-tag">React · Node.js · PostgreSQL</span>
+              <span class="work-tag">2025</span>
+            </div>
+            <p class="work-desc">Describe what this project does, the problem it solves, and what you built. Be specific about your role and the technical decisions you made.</p>
+          </div>
+          <span class="work-arrow">↗</span>
+        </div>
+        <div class="work-item">
+          <div>
+            <h3 class="work-title">Another Project</h3>
+            <div class="work-meta">
+              <span class="work-tag">Unity · C# · Firebase</span>
+              <span class="work-tag">2025</span>
+            </div>
+            <p class="work-desc">What genre, what mechanic, what challenge did you solve? Mention scale and any notable metrics.</p>
+          </div>
+          <span class="work-arrow">↗</span>
+        </div>
+        <div class="work-item">
+          <div>
+            <h3 class="work-title">Third Project</h3>
+            <div class="work-meta">
+              <span class="work-tag">Python · FastAPI · Android</span>
+              <span class="work-tag">2024</span>
+            </div>
+            <p class="work-desc">Describe the concept, your contribution, and the outcome.</p>
+          </div>
+          <span class="work-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="resume">
     <div class="container">
-      <h2>Resume</h2>
+      <div class="sec-head"><h2 class="sec-title">Resume</h2></div>
       <div class="resume-card glass reveal">
         <p>Download my latest resume below.</p>
-        <a href="assets/resume.pdf" class="btn btn-primary">Download PDF</a>
+        <a href="assets/resume.pdf" class="btn-solid">Download PDF</a>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container">
-      <h2>Experience</h2>
-      <div class="timeline">
-        <div class="tl-item glass reveal">
+      <div class="sec-head"><h2 class="sec-title">Experience</h2></div>
+      <div class="timeline reveal">
+        <div class="tl-item glass">
           <h3>Education</h3>
-          <p>Computer Science — add your university and year here.</p>
+          <p>B.S. Computer Science — add your university and year.</p>
         </div>
-        <div class="tl-item glass reveal">
+        <div class="tl-item glass">
           <h3>Experience</h3>
           <p>Add your work or internship experience here.</p>
         </div>
-        <div class="tl-item glass reveal">
+        <div class="tl-item glass">
           <h3>Achievements</h3>
           <p>Add your achievements or certifications here.</p>
         </div>
@@ -124,32 +162,34 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="projects-empty reveal">
-        Add your project cards here.
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
-      <h2>Contact</h2>
-      <div class="contact-grid reveal">
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-        <a href="mailto:">Email</a>
-        <a href="#">Discord</a>
+      <h2 class="contact-hed">Let's build<br>something <em>real.</em></h2>
+      <p class="contact-sub">Open to internships, collaborations, and interesting conversations.</p>
+      <div class="contact-max reveal">
+        <a href="mailto:your@email.com" class="clink">
+          <span class="clink-name">Email</span>
+          <div class="clink-right"><span class="clink-handle">harolddoton@gmail.com</span><span class="clink-arr">↗</span></div>
+        </a>
+        <a href="https://github.com/Haruuowo" class="clink">
+          <span class="clink-name">GitHub</span>
+          <div class="clink-right"><span class="clink-handle">@Haruuowo</span><span class="clink-arr">↗</span></div>
+        </a>
+        <a href="https://www.linkedin.com/in/harold-doton-606b18317/" class="clink">
+          <span class="clink-name">LinkedIn</span>
+          <div class="clink-right"><span class="clink-handle">John Harold Doton</span><span class="clink-arr">↗</span></div>
+        </a>
+        <a href="#" class="clink">
+          <span class="clink-name">Discord</span>
+          <div class="clink-right"><span class="clink-handle">@kairuuowo</span><span class="clink-arr">↗</span></div>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p>Designed &amp; built by <strong>John Harold Doton</strong> · © 2026</p>
+    <span>© 2026 John Harold Doton</span>
+    <span>Designed and built with care</span>
   </footer>
 
   <button id="backToTop">↑</button>
