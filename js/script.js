@@ -27,7 +27,7 @@ tick();
 const btn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => btn.classList.toggle('show', scrollY > 450));
 btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
+// hi
 // ACTIVE NAV
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('nav a');

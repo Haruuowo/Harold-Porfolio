@@ -327,7 +327,7 @@ footer span { font-size: .75rem; color: var(--darker); letter-spacing: .04em; }
 /* ---------- SCROLL REVEAL ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
-
+/* hi */
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 860px) {
   header { padding: 18px 24px; }
