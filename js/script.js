@@ -1,6 +1,6 @@
 /* =============================================
    JOHN HAROLD DOTON · PORTFOLIO
-   script.js — Dark Edition
+   script.js — Dark Edition + Light Mode
 ============================================= */
 
 // LOADER
@@ -8,6 +8,19 @@ window.addEventListener('load', () => {
   const l = document.getElementById('loader');
   l.style.opacity = '0';
   setTimeout(() => l.style.display = 'none', 500);
+});
+
+// THEME TOGGLE
+const toggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+  document.body.classList.add('light');
+  toggle.textContent = '☀️';
+}
+toggle?.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light');
+  toggle.textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
 
 // TYPING
@@ -27,7 +40,7 @@ tick();
 const btn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => btn.classList.toggle('show', scrollY > 450));
 btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-// hi
+
 // ACTIVE NAV
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('nav a');
@@ -40,7 +53,7 @@ window.addEventListener('scroll', () => {
 // HEADER SHADOW
 const header = document.querySelector('header');
 window.addEventListener('scroll', () =>
-  header.style.boxShadow = scrollY > 50 ? '0 8px 32px rgba(0,0,0,.6)' : 'none');
+  header.style.boxShadow = scrollY > 50 ? '0 8px 32px rgba(0,0,0,.15)' : 'none');
 
 // SCROLL REVEAL
 const obs = new IntersectionObserver(entries =>
