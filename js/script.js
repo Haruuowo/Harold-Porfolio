@@ -67,3 +67,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a =>
     e.preventDefault();
     document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
   }));
+
+// CONTACT FORM
+document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name    = document.getElementById('fname').value.trim();
+  const email   = document.getElementById('femail').value.trim();
+  const subject = document.getElementById('fsubject').value.trim();
+  const message = document.getElementById('fmsg').value.trim();
+  const status  = document.getElementById('formStatus');
+
+  if (!name || !email || !message) {
+    status.textContent = 'Please fill in all fields.';
+    status.className = 'form-status error';
+    return;
+  }
+
+  const sub  = encodeURIComponent((subject || 'Portfolio Contact') + ' — from ' + name);
+  const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+  window.location.href = 'mailto:harolddoton@gmail.com?subject=' + sub + '&body=' + body;
+
+  status.textContent = 'Opening your mail app...';
+  status.className = 'form-status success';
+  setTimeout(() => { status.textContent = ''; this.reset(); }, 3000);
+});
