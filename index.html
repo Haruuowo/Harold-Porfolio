@@ -28,8 +28,18 @@
       </ul>
     </nav>
     <div class="nav-right">
-      <button id="themeToggle" aria-label="Toggle theme">🌙</button>
-      <div class="nav-badge"><span class="nav-dot"></span>Open to work</div>
+      <div class="theme-dropdown" id="themeDropdown">
+        <button class="theme-dd-toggle" id="themeToggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="theme-dd-icon" id="themeIcon"></span>
+          <span class="theme-dd-label" id="themeLabel">Night mode</span>
+          <svg class="theme-dd-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="theme-dd-menu" id="themeMenu" role="listbox">
+          <li role="option" data-theme="dark" class="theme-dd-option"><span></span>Night mode</li>
+          <li role="option" data-theme="white" class="theme-dd-option"><span></span>Day mode</li>
+          <li role="option" data-theme="sunset" class="theme-dd-option"><span></span>Sunset mode</li>
+        </ul>
+      </div>
     </div>
   </header>
 
@@ -76,18 +86,36 @@
         <div class="skills-col">
           <span class="col-label">Development</span>
           <div class="skill-flow">
-            <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span>
-            <span class="skill">React</span><span class="skill">Tailwind CSS</span><span class="skill">Node.js</span>
-            <span class="skill">Express</span><span class="skill">Python</span><span class="skill">PostgreSQL</span>
-            <span class="skill">Firebase</span><span class="skill">C#</span>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" loading="lazy"><span>HTML</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" loading="lazy"><span>CSS</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy"><span>JavaScript</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy"><span>React</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy"><span>Tailwind CSS</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy"><span>Node.js</span></div>
+            <div class="skill"><img class="skill-icon mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" loading="lazy"><span>Express</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span>Python</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span>PostgreSQL</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" loading="lazy"><span>Firebase</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" loading="lazy"><span>C#</span></div>
           </div>
         </div>
         <div class="skills-col">
           <span class="col-label">Tools and design</span>
           <div class="skill-flow">
-            <span class="skill">Git</span><span class="skill">GitHub</span><span class="skill">Figma</span>
-            <span class="skill">Unity</span><span class="skill">Android Studio</span><span class="skill">VS Code</span>
-            <span class="skill">UI / UX</span><span class="skill">Game Design</span>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span>Git</span></div>
+            <div class="skill"><img class="skill-icon mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy"><span>GitHub</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy"><span>Figma</span></div>
+            <div class="skill"><img class="skill-icon mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity" loading="lazy"><span>Unity</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" loading="lazy"><span>Android Studio</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" loading="lazy"><span>VS Code</span></div>
+            <div class="skill">
+              <svg class="skill-icon skill-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+              <span>UI / UX</span>
+            </div>
+            <div class="skill">
+              <svg class="skill-icon skill-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
+              <span>Game Design</span>
+            </div>
           </div>
         </div>
       </div>

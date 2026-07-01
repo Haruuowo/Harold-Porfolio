@@ -13,11 +13,11 @@ a { color: inherit; text-decoration: none; }
 /* ---------- DARK TOKENS (default) ---------- */
 :root {
   --bg:     #0a0a0f;
-  --white:  #f0f0f0;
-  --muted:  #7a7a8a;
-  --dim:    #6a6a7a;
-  --faint:  #4a4a5a;
-  --darker: #3a3a4a;
+  --white:  #f4f4f4;
+  --muted:  #9d9dae;
+  --dim:    #92929f;
+  --faint:  #61616f;
+  --darker: #5c5c6c;
   --gold:   #E8D9B8;
   --glass:  rgba(255,255,255,.04);
   --border: rgba(255,255,255,.08);
@@ -28,8 +28,26 @@ a { color: inherit; text-decoration: none; }
   --skill-bg: rgba(255,255,255,.025);
 }
 
-/* ---------- LIGHT TOKENS ---------- */
-body.light {
+/* ---------- WHITE THEME (soft, warm — not stark white) ---------- */
+body.theme-white {
+  --bg:        #EDEAE2;
+  --white:     #1c1c1a;
+  --muted:     #6b6b60;
+  --dim:       #5a5a50;
+  --faint:     #a3a396;
+  --darker:    #8c8c7e;
+  --gold:      #8a5a2e;
+  --glass:     rgba(0,0,0,.035);
+  --border:    rgba(0,0,0,.09);
+  --bdgold:    rgba(138,90,46,.25);
+  --header-bg: rgba(237,234,226,.92);
+  --hero-img:  url("https://wallpaperaccess.com/full/8641912.jpg");
+  --hero-grad: linear-gradient(to top, rgba(237,234,226,1) 0%, rgba(237,234,226,1) 10%, rgba(237,234,226,.68) 45%, rgba(237,234,226,.28) 100%), linear-gradient(rgba(0,0,0,.14), rgba(0,0,0,.14));
+  --skill-bg:  rgba(0,0,0,.025);
+}
+
+/* ---------- SUNSET THEME ---------- */
+body.theme-sunset {
   --bg:        #2C1A0E;
   --white:     #F5E6D0;
   --muted:     #A07850;
@@ -56,20 +74,71 @@ body {
   transition: background .4s, color .4s;
 }
 
-/* ---------- THEME TOGGLE ---------- */
-#themeToggle {
-  width: 38px; height: 38px;
-  border-radius: 50%;
+/* ---------- THEME DROPDOWN ---------- */
+.theme-dropdown { position: relative; flex-shrink: 0; }
+.theme-dd-toggle {
+  display: flex; align-items: center; gap: 9px;
+  height: 38px;
+  padding: 0 14px 0 12px;
+  border-radius: 19px;
   border: 1px solid var(--border);
   background: var(--glass);
   color: var(--muted);
-  font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .75rem; font-weight: 500;
+  letter-spacing: .04em;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
   transition: border-color .2s, color .2s, background .2s;
-  flex-shrink: 0;
 }
-#themeToggle:hover { border-color: var(--gold); color: var(--gold); }
+.theme-dd-toggle:hover,
+.theme-dropdown.open .theme-dd-toggle { border-color: var(--gold); color: var(--gold); }
+.theme-dd-icon { font-size: .95rem; line-height: 1; }
+.theme-dd-caret {
+  width: 12px; height: 12px;
+  transition: transform .25s;
+}
+.theme-dropdown.open .theme-dd-caret { transform: rotate(180deg); }
+
+.theme-dd-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: var(--header-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 950;
+}
+.theme-dropdown.open .theme-dd-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.theme-dd-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: .8rem; font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.theme-dd-option span { font-size: .95rem; line-height: 1; }
+.theme-dd-option:hover { background: var(--glass); color: var(--gold); }
+.theme-dd-option.active { color: var(--gold); }
+
+/* ---------- THEME-SPECIFIC OVERRIDES ---------- */
+body.theme-white .btn-solid { background: #1c1c1a; color: #EDEAE2; }
+body.theme-white .btn-solid:hover { background: #8a5a2e; color: #EDEAE2; }
+body.theme-sunset .btn-solid { background: #F5E6D0; color: #2C1A0E; }
+body.theme-sunset .btn-solid:hover { background: #D4783A; color: #2C1A0E; }
+
 
 /* ---------- NAV ---------- */
 header {
@@ -93,8 +162,9 @@ header {
   object-fit: contain;
   transition: opacity .2s, transform .2s, filter .4s;
 }
-body:not(.light) .logo img { filter: invert(1); }
-body.light .logo img { filter: none; }
+body:not(.theme-white):not(.theme-sunset) .logo img { filter: invert(1); }
+body.theme-white .logo img { filter: none; }
+body.theme-sunset .logo img { filter: none; }
 .logo img:hover { opacity: .75; transform: scale(1.06); }
 
 nav ul { display: flex; gap: 32px; }
@@ -121,18 +191,6 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 .nav-right {
   display: flex; align-items: center; gap: 16px;
 }
-.nav-badge {
-  display: flex; align-items: center; gap: 8px;
-  font-size: .75rem; font-weight: 500;
-  color: var(--muted); letter-spacing: .04em;
-}
-.nav-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #6a9e6e;
-  animation: blink 2.5s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
 /* ---------- HERO ---------- */
 #hero {
@@ -255,16 +313,29 @@ section { padding: 80px 44px; border-bottom: 1px solid var(--border); transition
   color: var(--darker); margin-bottom: 24px; display: block;
   transition: color .4s;
 }
-.skill-flow { display: flex; flex-wrap: wrap; gap: 9px; }
+.skill-flow { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill {
-  font-size: .85rem; font-weight: 400;
-  color: var(--muted);
-  padding: 8px 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 9px;
+  width: 84px;
+  padding: 16px 8px 12px;
   border: 1px solid var(--border);
   background: var(--skill-bg);
-  transition: color .2s, border-color .2s, background .4s; cursor: default;
+  transition: border-color .2s, background .4s, transform .2s; cursor: default;
 }
-.skill:hover { color: var(--gold); border-color: var(--bdgold); }
+.skill:hover { border-color: var(--bdgold); transform: translateY(-3px); }
+.skill-icon { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
+.skill-icon-svg { color: var(--gold); }
+body:not(.theme-white) .skill-icon.mono { filter: invert(1) brightness(1.7); }
+.skill span {
+  font-size: .66rem; font-weight: 400;
+  letter-spacing: .01em;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+  transition: color .2s;
+}
+.skill:hover span { color: var(--gold); }
 
 /* ---------- WORK ---------- */
 .work-item {

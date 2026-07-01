@@ -10,18 +10,59 @@ window.addEventListener('load', () => {
   setTimeout(() => l.style.display = 'none', 500);
 });
 
-// THEME TOGGLE
-const toggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-  document.body.classList.add('light');
-  toggle.textContent = '☀️';
+// THEME DROPDOWN — Dark / Day / Sunset
+const dropdown   = document.getElementById('themeDropdown');
+const toggle      = document.getElementById('themeToggle');
+const menu        = document.getElementById('themeMenu');
+const themeIconEl = document.getElementById('themeIcon');
+const themeLabelEl= document.getElementById('themeLabel');
+const themeMeta = {
+  dark:   { icon: '🌙', label: 'Night mode' },
+  white:  { icon: '☀️', label: 'Day mode' },
+  sunset: { icon: '🌅', label: 'Sunset mode' }
+};
+
+function setTheme(theme) {
+  document.body.classList.remove('theme-white', 'theme-sunset');
+  if (theme === 'white') document.body.classList.add('theme-white');
+  if (theme === 'sunset') document.body.classList.add('theme-sunset');
+
+  const meta = themeMeta[theme];
+  if (themeIconEl) themeIconEl.textContent = meta.icon;
+  if (themeLabelEl) themeLabelEl.textContent = meta.label;
+
+  menu?.querySelectorAll('.theme-dd-option').forEach(opt =>
+    opt.classList.toggle('active', opt.dataset.theme === theme));
+
+  localStorage.setItem('theme', theme);
 }
-toggle?.addEventListener('click', () => {
-  const isLight = document.body.classList.toggle('light');
-  toggle.textContent = isLight ? '☀️' : '🌙';
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+function closeDropdown() {
+  dropdown?.classList.remove('open');
+  toggle?.setAttribute('aria-expanded', 'false');
+}
+
+toggle?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = dropdown.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(isOpen));
 });
+
+menu?.querySelectorAll('.theme-dd-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    setTheme(opt.dataset.theme);
+    closeDropdown();
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (dropdown && !dropdown.contains(e.target)) closeDropdown();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDropdown();
+});
+
+setTheme(localStorage.getItem('theme') || 'dark');
 
 // TYPING
 const words = ['Software Engineer', 'Full Stack Developer', 'Game Developer', 'UI / UX Enthusiast'];
