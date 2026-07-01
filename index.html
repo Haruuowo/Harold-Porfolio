@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>John Harold Doton · Portfolio</title>
   <link rel="stylesheet" href="css/styles.css">
+<base target="_blank">
 </head>
 <body>
 
@@ -125,41 +126,74 @@
   <section id="work">
     <div class="container">
       <div class="sec-head"><h2 class="sec-title">Work</h2><span class="sec-note">Projects</span></div>
-      <div class="reveal">
-        <div class="work-item">
-          <div>
-            <h3 class="work-title">Your Project Title</h3>
-            <div class="work-meta">
-              <span class="work-tag accent">Featured</span>
-              <span class="work-tag">React · Node.js · PostgreSQL</span>
-              <span class="work-tag">2025</span>
-            </div>
-            <p class="work-desc">Describe what this project does, the problem it solves, and what you built. Be specific about your role and the technical decisions you made.</p>
+
+      <!-- FEATURED PROJECT -->
+      <div class="project-featured reveal">
+        <a href="https://your-flag-project-link.com" target="_blank" class="project-featured-img">
+          <img src="assets/FlagProject.png" alt="Flag Project Preview" loading="lazy">
+        </a>
+        <div class="project-featured-content">
+          <span class="project-featured-label">Featured Project</span>
+          <h3 class="project-featured-title">Luna AI Vtuber</h3>
+          <p class="project-featured-desc">Luna is an AI-powered virtual streamer that broadcasts live on Twitch and TikTok, engaging with chat in real time through natural conversation, voice interaction, and autonomous gameplay in Minecraft. Built in Python with a Node.js bridge for game control, Luna combines a custom LLM-driven personality with real-time text-to-speech, giving her a distinct, sarcastic, and unscripted on-stream presence, with no human puppeteering required.</p>
+          <div class="project-featured-tags">
+            <span class="project-featured-tag">Python</span>
+            <span class="project-featured-tag">Groq</span>
+            <span class="project-featured-tag">ElevenLabs</span>
           </div>
-          <span class="work-arrow">↗</span>
+          <a href="https://your-flag-project-link.com" target="_blank" class="project-featured-link">
+            View project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
         </div>
-        <div class="work-item">
-          <div>
-            <h3 class="work-title">Another Project</h3>
-            <div class="work-meta">
-              <span class="work-tag">Unity · C# · Firebase</span>
-              <span class="work-tag">2025</span>
-            </div>
-            <p class="work-desc">What genre, what mechanic, what challenge did you solve? Mention scale and any notable metrics.</p>
+      </div>
+
+      <!-- PROJECT GRID -->
+      <div class="project-grid reveal">
+        <a href="https://project-two-link.com" target="_blank" class="project-card">
+          <div class="project-card-img">
+            <img src="assets/project-2.png" alt="Project Two Preview" loading="lazy">
           </div>
-          <span class="work-arrow">↗</span>
-        </div>
-        <div class="work-item">
-          <div>
-            <h3 class="work-title">Third Project</h3>
-            <div class="work-meta">
-              <span class="work-tag">Python · FastAPI · Android</span>
-              <span class="work-tag">2024</span>
+          <div class="project-card-body">
+            <h4 class="project-card-title">Project Two</h4>
+            <div class="project-card-tags">
+              <span class="project-card-tag accent">Unity</span>
+              <span class="project-card-tag">C#</span>
+              <span class="project-card-tag">Firebase</span>
             </div>
-            <p class="work-desc">Describe the concept, your contribution, and the outcome.</p>
+            <p class="project-card-desc">Short description of this project. What it does and what you built.</p>
           </div>
-          <span class="work-arrow">↗</span>
-        </div>
+        </a>
+
+        <a href="https://project-three-link.com" target="_blank" class="project-card">
+          <div class="project-card-img">
+            <img src="assets/project-3.png" alt="Project Three Preview" loading="lazy">
+          </div>
+          <div class="project-card-body">
+            <h4 class="project-card-title">Project Three</h4>
+            <div class="project-card-tags">
+              <span class="project-card-tag accent">Python</span>
+              <span class="project-card-tag">FastAPI</span>
+              <span class="project-card-tag">Android</span>
+            </div>
+            <p class="project-card-desc">Short description of this project. What it does and what you built.</p>
+          </div>
+        </a>
+
+        <a href="https://project-four-link.com" target="_blank" class="project-card">
+          <div class="project-card-img">
+            <img src="assets/project-4.png" alt="Project Four Preview" loading="lazy">
+          </div>
+          <div class="project-card-body">
+            <h4 class="project-card-title">Project Four</h4>
+            <div class="project-card-tags">
+              <span class="project-card-tag accent">React</span>
+              <span class="project-card-tag">Tailwind</span>
+              <span class="project-card-tag">Vercel</span>
+            </div>
+            <p class="project-card-desc">Short description of this project. What it does and what you built.</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>
