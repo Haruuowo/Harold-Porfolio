@@ -41,7 +41,7 @@ body.theme-white {
   --border:    rgba(0,0,0,.09);
   --bdgold:    rgba(138,90,46,.25);
   --header-bg: rgba(237,234,226,.92);
-  --hero-img:  url("https://wallpaperaccess.com/full/8641912.jpg");
+  --hero-img:  url("https://cdn.phototourl.com/free/2026-07-01-fc0b5103-dac1-4a7a-aa74-8388cc2a7b37.png");
   --hero-grad: linear-gradient(to top, rgba(237,234,226,1) 0%, rgba(237,234,226,1) 10%, rgba(237,234,226,.68) 45%, rgba(237,234,226,.28) 100%), linear-gradient(rgba(0,0,0,.14), rgba(0,0,0,.14));
   --skill-bg:  rgba(0,0,0,.025);
 }
