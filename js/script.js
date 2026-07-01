@@ -16,25 +16,47 @@ const toggle      = document.getElementById('themeToggle');
 const menu        = document.getElementById('themeMenu');
 const themeIconEl = document.getElementById('themeIcon');
 const themeLabelEl= document.getElementById('themeLabel');
+if (themeLabelEl) themeLabelEl.style.minWidth = '90px';
 const themeMeta = {
-  dark:   { icon: '🌙', label: 'Night mode' },
-  white:  { icon: '☀️', label: 'Day mode' },
-  sunset: { icon: '🌅', label: 'Sunset mode' }
+  dark:   { icon: '●', label: 'Night mode' },
+  white:  { icon: '○', label: 'Day mode' },
+  sunset: { icon: '◐', label: 'Sunset mode' }
 };
 
 function setTheme(theme) {
-  document.body.classList.remove('theme-white', 'theme-sunset');
-  if (theme === 'white') document.body.classList.add('theme-white');
-  if (theme === 'sunset') document.body.classList.add('theme-sunset');
+  const body = document.body;
 
-  const meta = themeMeta[theme];
-  if (themeIconEl) themeIconEl.textContent = meta.icon;
-  if (themeLabelEl) themeLabelEl.textContent = meta.label;
+  // Flash effect: brief overlay of the NEW theme color
+  body.classList.add('theme-flash');
 
-  menu?.querySelectorAll('.theme-dd-option').forEach(opt =>
-    opt.classList.toggle('active', opt.dataset.theme === theme));
+  // Small delay to let the flash render, then switch theme
+  setTimeout(() => {
+    body.classList.remove('theme-white', 'theme-sunset');
+    if (theme === 'white') body.classList.add('theme-white');
+    if (theme === 'sunset') body.classList.add('theme-sunset');
 
-  localStorage.setItem('theme', theme);
+    // Add smooth transition class
+    body.classList.add('theme-switching');
+
+    const meta = themeMeta[theme];
+    if (themeIconEl) themeIconEl.textContent = meta.icon;
+    if (themeLabelEl) themeLabelEl.textContent = meta.label;
+
+    menu?.querySelectorAll('.theme-dd-option').forEach(opt =>
+      opt.classList.toggle('active', opt.dataset.theme === theme));
+
+    localStorage.setItem('theme', theme);
+
+    // Fade out the flash
+    setTimeout(() => {
+      body.classList.remove('theme-flash');
+      body.classList.add('theme-flash-out');
+
+      setTimeout(() => {
+        body.classList.remove('theme-flash-out', 'theme-switching');
+      }, 400);
+    }, 150);
+  }, 50);
 }
 
 function closeDropdown() {

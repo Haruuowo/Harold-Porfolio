@@ -30,30 +30,30 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- WHITE THEME (soft, warm — not stark white) ---------- */
 body.theme-white {
-  --bg:        #EDEAE2;
+  --bg:        #D8D4CA;
   --white:     #1c1c1a;
-  --muted:     #6b6b60;
-  --dim:       #5a5a50;
-  --faint:     #a3a396;
-  --darker:    #8c8c7e;
-  --gold:      #8a5a2e;
-  --glass:     rgba(0,0,0,.035);
-  --border:    rgba(0,0,0,.09);
-  --bdgold:    rgba(138,90,46,.25);
-  --header-bg: rgba(237,234,226,.92);
-  --hero-img:  url("https://cdn.phototourl.com/free/2026-07-01-fc0b5103-dac1-4a7a-aa74-8388cc2a7b37.png");
-  --hero-grad: linear-gradient(to top, rgba(237,234,226,1) 0%, rgba(237,234,226,1) 10%, rgba(237,234,226,.68) 45%, rgba(237,234,226,.28) 100%), linear-gradient(rgba(0,0,0,.14), rgba(0,0,0,.14));
-  --skill-bg:  rgba(0,0,0,.025);
+  --muted:     #5a5a50;
+  --dim:       #4a4a40;
+  --faint:     #8c8c80;
+  --darker:    #787870;
+  --gold:      #7a4e24;
+  --glass:     rgba(0,0,0,.04);
+  --border:    rgba(0,0,0,.1);
+  --bdgold:    rgba(122,78,36,.3);
+  --header-bg: rgba(216,212,202,.92);
+  --hero-img:  url("../assets/backgroundimage.png");
+  --hero-grad: linear-gradient(to top, rgba(216,212,202,1) 0%, rgba(216,212,202,1) 5%, rgba(216,212,202,.45) 18%, rgba(216,212,202,.1) 35%, rgba(216,212,202,0) 55%, rgba(216,212,202,0) 100%);
+  --skill-bg:  rgba(0,0,0,.03);
 }
 
 /* ---------- SUNSET THEME ---------- */
 body.theme-sunset {
   --bg:        #2C1A0E;
   --white:     #F5E6D0;
-  --muted:     #A07850;
-  --dim:       #8A6840;
-  --faint:     #6A5030;
-  --darker:    #4A3820;
+  --muted:     #C4986A;
+  --dim:       #B89868;
+  --faint:     #9A7850;
+  --darker:    #7A6038;
   --gold:      #D4783A;
   --glass:     rgba(255,255,255,.06);
   --border:    rgba(255,255,255,.1);
@@ -79,6 +79,7 @@ body {
 .theme-dd-toggle {
   display: flex; align-items: center; gap: 9px;
   height: 38px;
+  min-width: 148px;
   padding: 0 14px 0 12px;
   border-radius: 19px;
   border: 1px solid var(--border);
@@ -89,6 +90,7 @@ body {
   letter-spacing: .04em;
   cursor: pointer;
   transition: border-color .2s, color .2s, background .2s;
+  white-space: nowrap;
 }
 .theme-dd-toggle:hover,
 .theme-dropdown.open .theme-dd-toggle { border-color: var(--gold); color: var(--gold); }
@@ -139,6 +141,163 @@ body.theme-white .btn-solid:hover { background: #8a5a2e; color: #EDEAE2; }
 body.theme-sunset .btn-solid { background: #F5E6D0; color: #2C1A0E; }
 body.theme-sunset .btn-solid:hover { background: #D4783A; color: #2C1A0E; }
 
+
+
+
+/* ---------- THEME SWITCH ANIMATION ---------- */
+body.theme-switching {
+  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching header {
+  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching section {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .glass,
+body.theme-switching .tl-item.glass {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s;
+}
+
+body.theme-switching .skill {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s;
+}
+
+body.theme-switching .tag {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .btn-solid,
+body.theme-switching .btn-line,
+body.theme-switching .btn-send {
+  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s, transform 0.2s;
+}
+
+body.theme-switching .form-group input,
+body.theme-switching .form-group textarea {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .csoc,
+body.theme-switching .contact-info-icon {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s;
+}
+
+body.theme-switching #backToTop {
+  transition: opacity 0.3s, border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching nav a,
+body.theme-switching .sec-title,
+body.theme-switching .work-title,
+body.theme-switching .tl-item h3,
+body.theme-switching .contact-hed,
+body.theme-switching .contact-info-val,
+body.theme-switching .form-group label,
+body.theme-switching .form-status,
+body.theme-switching footer span {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .hero-tag,
+body.theme-switching .sec-note,
+body.theme-switching .col-label,
+body.theme-switching .work-tag,
+body.theme-switching .work-desc,
+body.theme-switching .tl-item p,
+body.theme-switching .contact-sub,
+body.theme-switching .contact-info-label,
+body.theme-switching .contact-socials-label,
+body.theme-switching .muted-text {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .work-item {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .work-arrow {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s;
+}
+
+body.theme-switching .avatar {
+  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .about-body p {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .about-body p strong {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .skill span {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .skill-icon-svg {
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .theme-dd-toggle,
+body.theme-switching .theme-dd-menu {
+  transition: border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-switching .theme-dd-option {
+  transition: background 0.15s, color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hero image transition */
+body.theme-switching #hero {
+  transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ---------- THEME SWITCH FLASH EFFECT ---------- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  background: var(--bg);
+  transition: opacity 0.3s ease;
+}
+
+body.theme-flash::before {
+  opacity: 1;
+}
+
+body.theme-flash-out::before {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
 /* ---------- NAV ---------- */
 header {
@@ -200,7 +359,7 @@ nav a:hover::after, nav a.active::after { width: 100%; }
   flex-direction: column;
   justify-content: flex-end;
   padding: 140px 44px 72px;
-  background: var(--hero-grad), var(--hero-img) center/cover no-repeat fixed;
+  background: var(--hero-grad), var(--hero-img) center 65%/cover no-repeat fixed;
   overflow: hidden;
   border-bottom: none;
   transition: background .5s;
