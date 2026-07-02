@@ -104,6 +104,21 @@ const btn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => btn.classList.toggle('show', scrollY > 450));
 btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+// Keep the button clear of mobile browser toolbars (address bar / bottom nav)
+// that env(safe-area-inset-bottom) doesn't account for, by tracking the real
+// visible viewport size.
+function updateViewportOffset() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const covered = window.innerHeight - (vv.height + vv.offsetTop);
+  document.documentElement.style.setProperty('--vvb', Math.max(0, covered) + 'px');
+}
+if (window.visualViewport) {
+  visualViewport.addEventListener('resize', updateViewportOffset);
+  visualViewport.addEventListener('scroll', updateViewportOffset);
+  updateViewportOffset();
+}
+
 // ACTIVE NAV
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('nav a');
@@ -123,6 +138,69 @@ const obs = new IntersectionObserver(entries =>
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
   { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ABOUT — TYPEWRITER EFFECT
+const aboutTyped = document.getElementById('aboutTyped');
+const aboutTags  = document.getElementById('aboutTags');
+const typedSegments = [
+  { text: "I'm a Computer Science student at Holy Angel University, focused on ", bold: false },
+  { text: "artificial intelligence, software engineering", bold: true },
+  { text: ", and building things people actually use. I like turning ideas — AI tools, clean interfaces, or the occasional silly experiment — into real, working code.", bold: false }
+];
+
+function typeAbout() {
+  const cursor = document.createElement('span');
+  cursor.className = 'type-cursor';
+  aboutTyped.appendChild(cursor);
+
+  let segIndex = 0, charIndex = 0;
+
+  function step() {
+    if (segIndex >= typedSegments.length) {
+      setTimeout(() => {
+        cursor.remove();
+        aboutTags?.classList.add('stagger-in');
+      }, 500);
+      return;
+    }
+    const seg = typedSegments[segIndex];
+    if (charIndex < seg.text.length) {
+      const ch = document.createTextNode(seg.text[charIndex]);
+      if (seg.bold) {
+        let strongEl = aboutTyped.querySelector('strong.typing-current');
+        if (!strongEl) {
+          strongEl = document.createElement('strong');
+          strongEl.className = 'typing-current';
+          aboutTyped.insertBefore(strongEl, cursor);
+        }
+        strongEl.appendChild(ch);
+      } else {
+        aboutTyped.insertBefore(ch, cursor);
+      }
+      charIndex++;
+      setTimeout(step, 7 + Math.random() * 10);
+    } else {
+      aboutTyped.querySelector('strong.typing-current')?.classList.remove('typing-current');
+      segIndex++;
+      charIndex = 0;
+      setTimeout(step, 30);
+    }
+  }
+  step();
+}
+
+const aboutWrap = document.getElementById('aboutTypedWrap');
+if (aboutWrap) {
+  const aboutObs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        typeAbout();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  aboutObs.observe(aboutWrap);
+}
 
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a =>

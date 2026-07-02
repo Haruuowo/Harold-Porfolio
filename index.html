@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>John Harold Doton · Portfolio</title>
   <link rel="stylesheet" href="css/styles.css">
 <base target="_blank">
@@ -12,7 +12,7 @@
   <div id="loader" style="position:fixed;inset:0;background:#0a0a0f;display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity .5s;">
     <span style="font-family:'Syne',sans-serif;font-size:.9rem;letter-spacing:.35em;color:#E8D9B8;text-transform:uppercase;">Loading</span>
   </div>
-<!-- hi -->
+<!-- hi --> 
   <header>
     <div class="logo">
     <a href="#hero">
@@ -65,15 +65,15 @@
           <img src="assets/HAROLDPHOTO1.jpg" alt="John Harold Doton" onerror="this.style.display='none';this.parentElement.textContent='JD'">
         </div>
         <div class="about-body">
-          <p>I'm a <strong>Computer Science student</strong> from <strong>Holy Angel University</strong>, passionate for <strong>artificial intelligence, software engineering, and creating meaningful digital experiences</strong>. I enjoy building AI-powered applications, exploring emerging technologies, and turning ideas into practical solutions that people can use.</p>
-          <p>My interests revolve around <strong>artificial intelligence, frontend development, and creating fun experimental projects</strong>. Whether it's an AI tool, a polished web interface, or a silly idea that comes to mind, I enjoy bringing it to life through code.
-</p>
-          <div class="tagstrip">
+          <p class="about-typed-wrap" id="aboutTypedWrap">
+            <span class="sr-only">HI im Harold, I'm a Computer Science student at Holy Angel University, focused on artificial intelligence, software engineering, and building things people actually use. I like turning ideas AI tools, clean interfaces, I occasionally like creating silly projects that i could turn into real working code.</span>
+            <span id="aboutTyped" class="about-typed" aria-hidden="true"></span>
+          </p>
+          <div class="tagstrip" id="aboutTags">
             <span class="tag">Software Engineering</span>
-           
-            <span class="tag">Artificial Intelligence</span>
-            <span class="tag">UI / UX</span>
-            <span class="tag">Open Source</span>
+            <span class="tag">AI/ML Engineer</span>
+            <span class="tag">Frontend Developer</span>
+            <span class="tag">Backend Developer</span>
           </div>
         </div>
       </div>
@@ -98,6 +98,8 @@
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span>PostgreSQL</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" loading="lazy"><span>Firebase</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" loading="lazy"><span>C#</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy"><span>Java</span></div>
+            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" loading="lazy"><span>Dart</span></div>
           </div>
         </div>
         <div class="skills-col">
@@ -106,16 +108,11 @@
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span>Git</span></div>
             <div class="skill"><img class="skill-icon mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy"><span>GitHub</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy"><span>Figma</span></div>
-            <div class="skill"><img class="skill-icon mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity" loading="lazy"><span>Unity</span></div>
+            
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" loading="lazy"><span>Android Studio</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" loading="lazy"><span>VS Code</span></div>
-            <div class="skill">
-              <svg class="skill-icon skill-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-              <span>UI / UX</span>
-            </div>
-            <div class="skill">
-              <svg class="skill-icon skill-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
-              <span>Game Design</span>
+           
+           
             </div>
           </div>
         </div>
@@ -307,7 +304,7 @@
 
   <footer>
     <span>© 2026 John Harold Doton</span>
-    <span>Designed and built with care</span>
+
   </footer>
 
   <button id="backToTop">↑</button>
