@@ -23,7 +23,7 @@ a { color: inherit; text-decoration: none; }
   --border: rgba(255,255,255,.08);
   --bdgold: rgba(232,217,184,.25);
   --header-bg: rgba(10,10,15,.7);
-  --hero-img: url("https://mir-s3-cdn-cf.behance.net/project_modules/1400/7522e669919411.5b917a07ed3e0.jpg");
+  --hero-img: url("../assets/background_images/betternightimage.png");
   --hero-grad: linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,1) 8%, rgba(10,10,15,.55) 45%, rgba(10,10,15,.2) 100%);
   --skill-bg: rgba(255,255,255,.025);
 }
@@ -41,7 +41,7 @@ body.theme-white {
   --border:    rgba(0,0,0,.1);
   --bdgold:    rgba(122,78,36,.3);
   --header-bg: rgba(216,212,202,.92);
-  --hero-img:  url("../assets/backgroundimage.png");
+  --hero-img:  url("../assets/background_images/backgroundimage_light.png");
   --hero-grad: linear-gradient(to top, rgba(216,212,202,1) 0%, rgba(216,212,202,1) 5%, rgba(216,212,202,.45) 18%, rgba(216,212,202,.1) 35%, rgba(216,212,202,0) 55%, rgba(216,212,202,0) 100%);
   --skill-bg:  rgba(0,0,0,.03);
 }
@@ -455,8 +455,8 @@ section { padding: 80px 44px; border-bottom: 1px solid var(--border); transition
   transition: background .4s, border-color .4s;
 }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
-.about-body p { color: var(--dim); font-size: 1.15rem; font-weight: 600; line-height: 1.75; margin-bottom: 18px; transition: color .4s; }
-.about-body p strong { color: var(--white); font-weight: 600; transition: color .4s; }
+.about-body p { color: var(--white); font-size: 1.15rem; font-weight: 700; line-height: 1.75; margin-bottom: 18px; transition: color .4s; }
+.about-body p strong { color: var(--white); font-weight: 700; transition: color .4s; }
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;

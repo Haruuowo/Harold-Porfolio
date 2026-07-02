@@ -87,7 +87,7 @@ document.addEventListener('keydown', (e) => {
 setTheme(localStorage.getItem('theme') || 'dark');
 
 // TYPING
-const words = ['Software Engineer', 'Full Stack Developer', 'Game Developer', 'UI / UX Enthusiast'];
+const words = ['Software Engineer', 'Full Stack Developer', 'AI/ML Engineer', "Mobile App Developer"];
 let wi = 0, li = 0, del = false;
 function tick() {
   const w = words[wi], el = document.getElementById('typing');
@@ -143,9 +143,9 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 const aboutTyped = document.getElementById('aboutTyped');
 const aboutTags  = document.getElementById('aboutTags');
 const typedSegments = [
-  { text: "I'm a Computer Science student at Holy Angel University, focused on ", bold: false },
+  { text: "HI! im Harold, I'm a Computer Science student at Holy Angel University, focused on ", bold: true },
   { text: "artificial intelligence, software engineering", bold: true },
-  { text: ", and building things people actually use. I like turning ideas — AI tools, clean interfaces, or the occasional silly experiment — into real, working code.", bold: false }
+  { text: ", and building things people actually use. I like turning ideas AI tools, clean interfaces, I occasionally like creating silly projects that i could turn into real working code.", bold: true }
 ];
 
 function typeAbout() {
