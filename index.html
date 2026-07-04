@@ -6,6 +6,7 @@
   <title>John Harold Doton · Portfolio</title>
   <link rel="stylesheet" href="css/styles.css">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -47,7 +48,10 @@
   <section id="hero">
     <div>
       <p class="hero-tag">Portfolio · 2026</p>
-      <h1>John Harold<br>Doton</h1>
+      <h1 id="heroName">
+        <span class="sr-only">John Harold Doton</span>
+        <span aria-hidden="true"><span id="heroNameLine1"></span><br><span id="heroNameLine2"></span></span>
+      </h1>
       <p class="hero-sub"><span id="typing"></span></p>
       <p class="hero-sub" style="margin-top:12px;">Building modern web applications and creative digital experiences.</p>
       <div class="hero-row">
@@ -97,7 +101,7 @@
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span>Python</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span>PostgreSQL</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" loading="lazy"><span>Firebase</span></div>
-            <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" loading="lazy"><span>C#</span></div>
+           
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy"><span>Java</span></div>
             <div class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" loading="lazy"><span>Dart</span></div>
           </div>
@@ -191,16 +195,6 @@
             <p class="project-card-desc">Short description of this project. What it does and what you built.</p>
           </div>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="resume">
-    <div class="container">
-      <div class="sec-head"><h2 class="sec-title">Resume</h2></div>
-      <div class="resume-card glass reveal">
-        <p>Download my latest resume below.</p>
-        <a href="assets/resume.pdf" class="btn-solid">Download PDF</a>
       </div>
     </div>
   </section>

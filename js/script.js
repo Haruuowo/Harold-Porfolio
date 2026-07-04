@@ -25,29 +25,34 @@ const themeMeta = {
 
 function setTheme(theme) {
   const body = document.body;
+  if (!themeMeta[theme]) theme = 'dark'; // guard against bad/stale localStorage values
 
   // Flash effect: brief overlay of the NEW theme color
   body.classList.add('theme-flash');
 
   // Small delay to let the flash render, then switch theme
   setTimeout(() => {
-    body.classList.remove('theme-white', 'theme-sunset');
-    if (theme === 'white') body.classList.add('theme-white');
-    if (theme === 'sunset') body.classList.add('theme-sunset');
+    try {
+      body.classList.remove('theme-white', 'theme-sunset');
+      if (theme === 'white') body.classList.add('theme-white');
+      if (theme === 'sunset') body.classList.add('theme-sunset');
 
-    // Add smooth transition class
-    body.classList.add('theme-switching');
+      // Add smooth transition class
+      body.classList.add('theme-switching');
 
-    const meta = themeMeta[theme];
-    if (themeIconEl) themeIconEl.textContent = meta.icon;
-    if (themeLabelEl) themeLabelEl.textContent = meta.label;
+      const meta = themeMeta[theme];
+      if (themeIconEl) themeIconEl.textContent = meta.icon;
+      if (themeLabelEl) themeLabelEl.textContent = meta.label;
 
-    menu?.querySelectorAll('.theme-dd-option').forEach(opt =>
-      opt.classList.toggle('active', opt.dataset.theme === theme));
+      menu?.querySelectorAll('.theme-dd-option').forEach(opt =>
+        opt.classList.toggle('active', opt.dataset.theme === theme));
 
-    localStorage.setItem('theme', theme);
+      localStorage.setItem('theme', theme);
+    } catch (err) {
+      console.error('setTheme error:', err);
+    }
 
-    // Fade out the flash
+    // Fade out the flash — runs no matter what happened above
     setTimeout(() => {
       body.classList.remove('theme-flash');
       body.classList.add('theme-flash-out');
@@ -85,6 +90,74 @@ document.addEventListener('keydown', (e) => {
 });
 
 setTheme(localStorage.getItem('theme') || 'dark');
+
+// SCRAMBLE CHARS (shared by nav links + hero name)
+const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+function scrambleInto(el, originalText) {
+  let iterations = 0;
+  clearInterval(el.dataset.scrambleInterval);
+  const interval = setInterval(() => {
+    el.textContent = originalText
+      .split('')
+      .map((char, i) => (i < iterations ? originalText[i] : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]))
+      .join('');
+    if (iterations >= originalText.length) clearInterval(interval);
+    iterations += 1 / 3;
+  }, 30);
+  el.dataset.scrambleInterval = interval;
+}
+
+// HERO NAME — TYPE-IN THEN IDLE FLICKER + HOVER SCRAMBLE
+const heroNameEl  = document.getElementById('heroName');
+const heroLine1El = document.getElementById('heroNameLine1');
+const heroLine2El = document.getElementById('heroNameLine2');
+if (heroNameEl && heroLine1El && heroLine2El) {
+  const nameLines = ['John Harold', 'Doton'];
+  const cursor = document.createElement('span');
+  cursor.className = 'type-cursor';
+  heroLine1El.parentElement.appendChild(cursor); // lives at end of the wrapping span initially
+
+  function typeName() {
+    let lineIndex = 0, charIndex = 0;
+    const targets = [heroLine1El, heroLine2El];
+
+    function placeCursorAfter(target) {
+      target.insertAdjacentElement('afterend', cursor);
+    }
+    placeCursorAfter(heroLine1El);
+
+    function step() {
+      if (lineIndex >= nameLines.length) {
+        setTimeout(() => {
+          cursor.remove();
+          heroNameEl.classList.add('name-flicker');
+        }, 600);
+        return;
+      }
+      const line = nameLines[lineIndex];
+      const target = targets[lineIndex];
+      if (charIndex < line.length) {
+        target.textContent += line[charIndex];
+        charIndex++;
+        setTimeout(step, 55 + Math.random() * 40);
+      } else {
+        lineIndex++;
+        charIndex = 0;
+        if (lineIndex < nameLines.length) placeCursorAfter(targets[lineIndex]);
+        setTimeout(step, 220);
+      }
+    }
+    step();
+  }
+  // Slight delay so it kicks off right after the loader clears
+  setTimeout(typeName, 550);
+
+  heroNameEl.style.cursor = 'pointer';
+  heroNameEl.addEventListener('click', () => {
+    scrambleInto(heroLine1El, 'John Harold');
+    scrambleInto(heroLine2El, 'Doton');
+  });
+}
 
 // TYPING
 const words = ['Software Engineer', 'Full Stack Developer', 'AI/ML Engineer', "Mobile App Developer"];
@@ -133,11 +206,56 @@ const header = document.querySelector('header');
 window.addEventListener('scroll', () =>
   header.style.boxShadow = scrollY > 50 ? '0 8px 32px rgba(0,0,0,.15)' : 'none');
 
+// HERO — VHS TRACKING GLITCH
+const heroEl = document.getElementById('hero');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (heroEl && !prefersReducedMotion) {
+  function scheduleGlitch() {
+    const delay = 4000 + Math.random() * 5000; // every ~4–9s
+    setTimeout(() => {
+      heroEl.classList.add('vhs-glitch');
+      setTimeout(() => heroEl.classList.remove('vhs-glitch'), 400);
+      scheduleGlitch();
+    }, delay);
+  }
+  scheduleGlitch();
+}
+
 // SCROLL REVEAL
 const obs = new IntersectionObserver(entries =>
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
   { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// SKILLS — PIXELATE RESOLVE
+const skillsCols = document.querySelector('.skills-cols');
+if (skillsCols) {
+  const skillEls = skillsCols.querySelectorAll('.skill');
+  const skillsObs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      skillEls.forEach((el, i) => {
+        if (!prefersReducedMotion) {
+          el.style.transition = 'opacity .3s ease, filter .4s steps(4), transform .4s steps(4)';
+          el.style.transitionDelay = (i * 0.05) + 's';
+        }
+        el.style.transform = 'scale(1)';
+        el.style.filter = 'blur(0) contrast(1)';
+      });
+      skillsCols.classList.add('pixelate-in');
+      setTimeout(() => {
+        skillEls.forEach(el => {
+          el.style.transition = '';
+          el.style.transitionDelay = '';
+          el.style.transform = '';
+          el.style.filter = '';
+        });
+      }, 400 + skillEls.length * 50 + 250);
+      observer.disconnect();
+    });
+  }, { threshold: 0.15 });
+  skillsObs.observe(skillsCols);
+}
 
 // ABOUT — TYPEWRITER EFFECT
 const aboutTyped = document.getElementById('aboutTyped');
@@ -231,4 +349,128 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
   status.textContent = 'Opening your mail app...';
   status.className = 'form-status success';
   setTimeout(() => { status.textContent = ''; this.reset(); }, 3000);
+});
+
+// ============================================================
+// CUSTOM CURSOR + INTERACTIVITY
+// ============================================================
+
+const cursorDot = document.createElement('div');
+cursorDot.id = 'cursor-dot';
+document.body.appendChild(cursorDot);
+
+const cursorRing = document.createElement('div');
+cursorRing.id = 'cursor-ring';
+document.body.appendChild(cursorRing);
+
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+let isMoving = false;
+let moveTimeout;
+
+// Track mouse position
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  // Move dot instantly
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
+
+  // Particle trail
+  if (isMoving && Math.random() > 0.85) {
+    createParticle(mouseX, mouseY);
+  }
+
+  isMoving = true;
+  clearTimeout(moveTimeout);
+  moveTimeout = setTimeout(() => { isMoving = false; }, 100);
+});
+
+// Smooth ring follow
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.15;
+  ringY += (mouseY - ringY) * 0.15;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Click states
+document.addEventListener('mousedown', () => {
+  cursorDot.classList.add('click');
+  cursorRing.classList.add('click');
+});
+document.addEventListener('mouseup', () => {
+  cursorDot.classList.remove('click');
+  cursorRing.classList.remove('click');
+});
+
+// Hover detection for interactive elements
+const hoverTargets = 'a, button, .btn-solid, .btn-line, .skill, .tag, .project-card, .project-featured-img, .csoc, input, textarea, .theme-dd-option';
+document.querySelectorAll(hoverTargets).forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursorDot.classList.add('hover');
+    cursorRing.classList.add('hover');
+  });
+  el.addEventListener('mouseleave', () => {
+    cursorDot.classList.remove('hover');
+    cursorRing.classList.remove('hover');
+  });
+});
+
+// Particle trail
+function createParticle(x, y) {
+  const p = document.createElement('div');
+  p.className = 'cursor-particle';
+  const size = 2 + Math.random() * 4;
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+  p.style.left = x + 'px';
+  p.style.top = y + 'px';
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 600);
+}
+
+// Magnetic buttons
+document.querySelectorAll('.btn-solid, .btn-line, .btn-send, .csoc').forEach(btn => {
+  btn.classList.add('magnetic');
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+// Hero parallax on scroll
+if (heroEl) {
+  const heroBg = document.createElement('div');
+  heroBg.id = 'hero-bg';
+  heroEl.insertBefore(heroBg, heroEl.firstChild);
+
+  if (!prefersReducedMotion) {
+    function updateHeroParallax() {
+      const heroHeight = heroEl.offsetHeight || 1;
+      const maxShift = heroHeight * 0.06; // stays well inside the 8% bleed buffer
+      const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
+      heroBg.style.transform = `translateY(${-progress * maxShift}px)`;
+    }
+    window.addEventListener('scroll', updateHeroParallax);
+    updateHeroParallax();
+  }
+}
+
+// Text scramble effect for nav links
+document.querySelectorAll('nav a').forEach(link => {
+  const originalText = link.textContent;
+  link.addEventListener('mouseenter', () => scrambleInto(link, originalText));
+  link.addEventListener('mouseleave', () => {
+    clearInterval(link.dataset.scrambleInterval);
+    link.textContent = originalText;
+  });
 });
