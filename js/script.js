@@ -152,8 +152,11 @@ if (heroNameEl && heroLine1El && heroLine2El) {
   // Slight delay so it kicks off right after the loader clears
   setTimeout(typeName, 550);
 
-  heroNameEl.style.cursor = 'pointer';
-  heroNameEl.addEventListener('click', () => {
+    heroLine1El.addEventListener('click', () => {
+    scrambleInto(heroLine1El, 'John Harold');
+    scrambleInto(heroLine2El, 'Doton');
+  });
+    heroLine2El.addEventListener('click', () => {
     scrambleInto(heroLine1El, 'John Harold');
     scrambleInto(heroLine2El, 'Doton');
   });
