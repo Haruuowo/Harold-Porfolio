@@ -477,3 +477,26 @@ document.querySelectorAll('nav a').forEach(link => {
     link.textContent = originalText;
   });
 });
+// Project list item hover - subtle parallax on the image
+// (CSS handles most of it, this adds a tiny bit of JS magic)
+document.querySelectorAll('.project-list-item').forEach(item => {
+  const imgWrap = item.querySelector('.project-list-img-wrap');
+  if (!imgWrap) return;
+
+  item.addEventListener('mousemove', (e) => {
+    const rect = imgWrap.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    const img = imgWrap.querySelector('img');
+    if (img) {
+      img.style.transform = `scale(1.06) translate(${x * -6}px, ${y * -4}px)`;
+    }
+  });
+
+  item.addEventListener('mouseleave', () => {
+    const img = imgWrap.querySelector('img');
+    if (img) {
+      img.style.transform = '';
+    }
+  });
+});
