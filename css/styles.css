@@ -111,7 +111,9 @@ body {
   .tag,
   .work-item,
   .theme-dd-toggle,
-  .theme-dd-option {
+  .theme-dd-option,
+  .hamburger,
+  .mobile-nav a {
     cursor: none;
   }
 
@@ -570,6 +572,119 @@ nav a.active::after {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+/* ---------- HAMBURGER (mobile nav trigger) ---------- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  flex-shrink: 0;
+  transition: border-color .2s, background .2s;
+}
+
+.hamburger:hover {
+  border-color: var(--gold);
+}
+
+.hamburger span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--muted);
+  border-radius: 1px;
+  transition: transform .3s ease, opacity .2s ease, background .3s ease;
+}
+
+.hamburger.open {
+  border-color: var(--gold);
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.hamburger.open span {
+  background: var(--gold);
+}
+
+/* ---------- MOBILE NAV DRAWER ---------- */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 940;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(300px, 78vw);
+  padding: 100px 32px 40px;
+  background: var(--header-bg);
+  backdrop-filter: blur(24px);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform .35s cubic-bezier(.4, 0, .2, 1), border-color .4s, background .4s;
+  z-index: 950;
+  overflow-y: auto;
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 14px 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  transition: color .2s;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active {
+  color: var(--gold);
+}
+
+body.nav-open {
+  overflow: hidden;
 }
 
 /* ---------- HERO ---------- */
@@ -2002,6 +2117,15 @@ footer span {
   transform: none;
 }
 
+/* Safety net: never allow the mobile drawer/overlay to render on desktop
+   widths, even if the "open" class gets stuck due to a missed resize event. */
+@media (min-width: 861px) {
+  .mobile-nav,
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 860px) {
   header {
@@ -2010,6 +2134,10 @@ footer span {
 
   nav {
     display: none;
+  }
+
+  .hamburger {
+    display: flex;
   }
 
   section {
@@ -2061,5 +2189,37 @@ footer span {
 
   #hero h1 {
     font-size: 2.6rem;
+  }
+
+  /* Keep the theme toggle from crowding the logo + hamburger on narrow phones */
+  .theme-dd-toggle {
+    min-width: 0;
+    padding: 0 10px;
+  }
+
+  .theme-dd-label {
+    display: none;
+  }
+
+  .theme-dd-icon {
+    margin-right: 0;
+  }
+
+  .nav-right {
+    gap: 10px;
+  }
+
+  .mobile-nav {
+    width: min(280px, 82vw);
+    padding: 90px 24px 32px;
+  }
+
+  .tl-item {
+    margin-left: 22px;
+    padding: 20px 18px;
+  }
+
+  .tl-item::before {
+    left: -28px;
   }
 }

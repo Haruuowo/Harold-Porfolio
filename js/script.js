@@ -91,6 +91,48 @@ document.addEventListener('keydown', (e) => {
 
 setTheme(localStorage.getItem('theme') || 'dark');
 
+// HAMBURGER — MOBILE NAV DRAWER
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+const mobileNav = document.getElementById('mobileNav');
+const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+function openMobileNav() {
+  hamburgerBtn?.classList.add('open');
+  mobileNav?.classList.add('open');
+  mobileNavOverlay?.classList.add('open');
+  hamburgerBtn?.setAttribute('aria-expanded', 'true');
+  mobileNav?.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('nav-open');
+}
+
+function closeMobileNav() {
+  hamburgerBtn?.classList.remove('open');
+  mobileNav?.classList.remove('open');
+  mobileNavOverlay?.classList.remove('open');
+  hamburgerBtn?.setAttribute('aria-expanded', 'false');
+  mobileNav?.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('nav-open');
+}
+
+hamburgerBtn?.addEventListener('click', () => {
+  if (mobileNav?.classList.contains('open')) closeMobileNav();
+  else openMobileNav();
+});
+
+mobileNavOverlay?.addEventListener('click', closeMobileNav);
+
+mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMobileNav();
+});
+
+// Close the drawer if the viewport grows back into desktop size
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 860) closeMobileNav();
+});
+
 // SCRAMBLE CHARS (shared by nav links + hero name)
 const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
 function scrambleInto(el, originalText) {
@@ -197,7 +239,7 @@ if (window.visualViewport) {
 
 // ACTIVE NAV
 const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('nav a');
+const navLinks = document.querySelectorAll('nav a, .mobile-nav a');
 window.addEventListener('scroll', () => {
   let cur = '';
   sections.forEach(s => { if (pageYOffset >= s.offsetTop - 160) cur = s.id; });
@@ -411,7 +453,7 @@ document.addEventListener('mouseup', () => {
 });
 
 // Hover detection for interactive elements
-const hoverTargets = 'a, button, .btn-solid, .btn-line, .skill, .tag, .project-card, .project-featured-img, .csoc, input, textarea, .theme-dd-option';
+const hoverTargets = 'a, button, .btn-solid, .btn-line, .skill, .tag, .project-card, .project-featured-img, .csoc, input, textarea, .theme-dd-option, .hamburger';
 document.querySelectorAll(hoverTargets).forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursorDot.classList.add('hover');
