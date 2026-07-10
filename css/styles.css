@@ -2222,7 +2222,7 @@ footer span {
     font-size: 2.6rem;
   }
 
-  /* Keep the theme toggle from crowding the logo + hamburger on narrow phones */
+  /* Keep the theme toggle from crowding the logo + hamburger on narrow phoddes */
   .theme-dd-toggle {
     min-width: 0;
     padding: 0 10px;
