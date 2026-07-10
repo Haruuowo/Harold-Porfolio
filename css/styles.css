@@ -588,6 +588,10 @@ nav a.active::after {
   background: var(--glass);
   flex-shrink: 0;
   transition: border-color .2s, background .2s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 960; /* above nav when open */
 }
 
 .hamburger:hover {
@@ -629,10 +633,17 @@ nav a.active::after {
   inset: 0;
   background: rgba(0, 0, 0, .5);
   backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s ease;
   z-index: 940;
+}
+
+/* Ensure nav is above overlay and clickable */
+.mobile-nav.open {
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .mobile-nav-overlay.open {
@@ -645,15 +656,20 @@ nav a.active::after {
   top: 0;
   right: 0;
   height: 100dvh;
+  height: 100vh; /* fallback */
   width: min(300px, 78vw);
   padding: 100px 32px 40px;
   background: var(--header-bg);
+  background-color: var(--bg); /* solid fallback */
   backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); /* Safari */
   border-left: 1px solid var(--border);
   transform: translateX(100%);
   transition: transform .35s cubic-bezier(.4, 0, .2, 1), border-color .4s, background .4s;
   z-index: 950;
   overflow-y: auto;
+  display: flex; /* ensure content is visible */
+  flex-direction: column;
 }
 
 .mobile-nav.open {
@@ -676,6 +692,21 @@ nav a.active::after {
   color: var(--muted);
   border-bottom: 1px solid var(--border);
   transition: color .2s;
+  opacity: 1 !important; /* force visible */
+  visibility: visible !important;
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav li {
+  opacity: 1;
+  visibility: visible;
 }
 
 .mobile-nav a:hover,

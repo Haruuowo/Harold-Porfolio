@@ -93,42 +93,65 @@ setTheme(localStorage.getItem('theme') || 'dark');
 
 // HAMBURGER — MOBILE NAV DRAWER
 const hamburgerBtn = document.getElementById('hamburgerBtn');
-
 const mobileNav = document.getElementById('mobileNav');
 const mobileNavOverlay = document.getElementById('mobileNavOverlay');
 
 function openMobileNav() {
+  if (!mobileNav || !mobileNavOverlay) return;
   hamburgerBtn?.classList.add('open');
-  mobileNav?.classList.add('open');
-  mobileNavOverlay?.classList.add('open');
+  mobileNav.classList.add('open');
+  mobileNavOverlay.classList.add('open');
   hamburgerBtn?.setAttribute('aria-expanded', 'true');
-  mobileNav?.setAttribute('aria-hidden', 'false');
+  mobileNav.setAttribute('aria-hidden', 'false');
   document.body.classList.add('nav-open');
+  // Force reflow to ensure transition triggers
+  void mobileNav.offsetWidth;
 }
 
 function closeMobileNav() {
+  if (!mobileNav || !mobileNavOverlay) return;
   hamburgerBtn?.classList.remove('open');
-  mobileNav?.classList.remove('open');
-  mobileNavOverlay?.classList.remove('open');
+  mobileNav.classList.remove('open');
+  mobileNavOverlay.classList.remove('open');
   hamburgerBtn?.setAttribute('aria-expanded', 'false');
-  mobileNav?.setAttribute('aria-hidden', 'true');
+  mobileNav.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('nav-open');
 }
 
-hamburgerBtn?.addEventListener('click', () => {
+function toggleMobileNav(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   if (mobileNav?.classList.contains('open')) closeMobileNav();
   else openMobileNav();
+}
+
+// Multiple event types for maximum compatibility
+hamburgerBtn?.addEventListener('touchend', toggleMobileNav, { passive: false });
+hamburgerBtn?.addEventListener('click', toggleMobileNav);
+
+// Close on overlay tap
+function onOverlayTap(e) {
+  if (e) e.preventDefault();
+  closeMobileNav();
+}
+mobileNavOverlay?.addEventListener('touchend', onOverlayTap, { passive: false });
+mobileNavOverlay?.addEventListener('click', onOverlayTap);
+
+// Close on nav link click
+mobileNav?.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    closeMobileNav();
+  });
 });
 
-mobileNavOverlay?.addEventListener('click', closeMobileNav);
-
-mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
-
+// Escape to close
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeMobileNav();
 });
 
-// Close the drawer if the viewport grows back into desktop size
+// Close on resize to desktop
 window.addEventListener('resize', () => {
   if (window.innerWidth > 860) closeMobileNav();
 });
